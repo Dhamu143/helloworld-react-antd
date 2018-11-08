@@ -4,6 +4,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { COLOR } from '../common/styles';
 
+import { Layout, Card } from 'antd';
+
 import LoginView from './LoginView';
 import SignupView from './SignupView';
 import ResetView from './ResetView';
@@ -14,26 +16,24 @@ import LOGO from '../assets/logo.png';
 class Entrance extends Component {
   render() {
     return (
-      <div style={{ backgroundColor: `${COLOR.primary}` }} className="-x-fit">
-        <div
-          style={{
-            alignItems: 'center',
+      <Layout
+        style={{
             display: 'flex',
-            height: '100%',
-            justifyContent: 'center',
             flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
-        >
-          <img src={LOGO} alt="logo" style={{ marginBottom: 16 }} />
-
+      >
+        <Card style={{ width: 300 }} >
+          <img src={LOGO} alt="logo" style={{ margin: 16, width: 100 }} />
           <Switch>
             <Route exact path="/login" component={LoginView} />
             <Route exact path="/signup" component={SignupView} />
             <Route exact path="/reset" component={ResetView} />
             <Redirect exact from="/*" to="/login" />
           </Switch>
-        </div>
-      </div>
+        </Card>
+      </Layout>
     );
   }
 }

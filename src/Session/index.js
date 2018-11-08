@@ -5,23 +5,14 @@ import {
   Switch, Route, Redirect, Link, withRouter,
 } from 'react-router-dom';
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  SwipeableDrawer,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-  Avatar,
-  IconButton,
-  Icon,
-} from '@material-ui/core';
+
+import { Layout, Menu, Icon, Avatar, Popover } from 'antd';
 
 import { connect } from 'react-redux';
 
 import ProfileView from './ProfileView';
+import Option1View from './Option1View';
+import Option2View from './Option2View';
 import HomeView from '../Home/HomeView';
 
 import { $logout } from '../Auth/state';
@@ -65,16 +56,19 @@ const styles = {
 // eslint-disable-next-line
 class Session extends Component {
   state = {
+    collapsed: false,
     swipeableDrawerCallapsed: false,
     navigationMenuItems: [
       {
+        key: '1',
         title: 'Home',
         icon: 'home',
         route: '/home',
       },
       {
+        key: '2',
         title: 'Profile',
-        icon: 'account_circle',
+        icon: 'user',
         route: '/profile',
       },
     ],
@@ -86,68 +80,99 @@ class Session extends Component {
     });
   };
 
+  toggle = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  }
+
   render() {
-    const { swipeableDrawerCallapsed, navigationMenuItems } = this.state;
+    const text = <span>Title</span>;
+    const content = (
+      <Menu mode="horizontal">
+        <Menu.Item onClick={() => logout()}>
+          <Icon type="logout" />
+          <span>Logout</span>
+        </Menu.Item>
+      </Menu>
+    );
+
+    const { collapsed, navigationMenuItems } = this.state;
     const { user, logout } = this.props;
-
     return (
-      <div className="-x-fit">
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton style={styles.menuButton} color="inherit" onClick={this.toggleDrawer(true)}>
-              <Icon>menu</Icon>
-            </IconButton>
-
-            <Typography variant="title" color="inherit">
-              Home
-            </Typography>
-          </Toolbar>
-        </AppBar>
-
-        <SwipeableDrawer
-          open={swipeableDrawerCallapsed}
-          onClose={this.toggleDrawer(false)}
-          onOpen={this.toggleDrawer(true)}
-          disableBackdropTransition={!iOS}
-          disableDiscovery={iOS}
-          style={styles.swipeableDrawerPaper}
-        >
-          <div tabIndex={0} role="button" onClick={this.toggleDrawer(false)} onKeyDown={this.toggleDrawer(false)}>
-            <ListItem style={styles.listItem}>
-              <Avatar alt={user.name} src={user.picture} />
-              <ListItemText primary={user.name} secondary={user.email} />
-            </ListItem>
-
-            <Divider />
-
-            {navigationMenuItems.map((navigationMenuItem) => (
-              <Link to={navigationMenuItem.route} key={navigationMenuItem.title}>
-                <ListItem dense button i-key={navigationMenuItem.title}>
-                  <ListItemIcon>
-                    <Icon>{navigationMenuItem.icon}</Icon>
-                  </ListItemIcon>
-                  <ListItemText primary={navigationMenuItem.title} />
-                </ListItem>
+      <Layout>
+       <Layout.Sider
+         trigger={null}
+         collapsible
+         collapsed={collapsed}
+       >
+         <div className="logo" />
+         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+           {navigationMenuItems.map((navigationMenuItem) => (
+             <Menu.Item key={navigationMenuItem.key}>
+              <Link to={navigationMenuItem.route}>
+                <Icon type={navigationMenuItem.icon} />
+                <span>{navigationMenuItem.title}</span>
+               </Link>
+             </Menu.Item>
+           ))}
+           <Menu.SubMenu title={<span><Icon type="setting" /><span>Navigation</span></span>}>
+            <Menu.Item key="3">
+              <Link to="option1">
+                <span>Option 1</span>
               </Link>
-            ))}
-
-            <ListItem dense button onClick={() => logout()}>
-              <ListItemIcon>
-                <Icon>exit_to_app</Icon>
-              </ListItemIcon>
-              <ListItemText primary="Log out" />
-            </ListItem>
-          </div>
-        </SwipeableDrawer>
-
-        <main className="-fill-height -x-relative">
-          <Switch>
-            <Route exact path="/home" component={HomeView} />
-            <Route exact path="/profile" component={ProfileView} />
-            <Redirect exact from="/*" to="/home" />
-          </Switch>
-        </main>
-      </div>
+            </Menu.Item>
+            <Menu.Item key="4">
+              <Link to="option2">
+                <span>Option 2</span>
+              </Link>
+            </Menu.Item>
+          </Menu.SubMenu>
+         </Menu>
+       </Layout.Sider>
+       <Layout>
+         <Layout.Header
+           style={{
+            background: '#fff',
+            padding: 0,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+          >
+           <Icon
+             style={{
+               paddingTop: 21,
+               paddingLeft: 21,
+               fontSize: 18,
+               cursor: 'pointer',
+             }}
+             type={collapsed ? 'menu-unfold' : 'menu-fold'}
+             onClick={this.toggle}
+           />
+           <div style={{ flex: 1 }} />
+           <Avatar style={{ margin: 'auto', backgroundColor:'#00e8ba'}}>
+            {user.name.substring(0,2).toUpperCase()}
+           </Avatar>
+           <Popover
+              placement="bottomRight"
+              content={content}
+              trigger="click"
+            >
+              <Icon style={{paddingRight: 16, paddingLeft:16 ,paddingTop: 24, cursor: 'pointer'}} type="down" />
+           </Popover>
+         </Layout.Header>
+         <Layout.Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+           <Switch>
+             <Route exact path="/home" component={HomeView} />
+             <Route exact path="/profile" component={ProfileView} />
+             <Route exact path="/option1" component={Option1View} />
+             <Route exact path="/option2" component={Option2View} />
+             <Redirect exact from="/*" to="/home" />
+           </Switch>
+         </Layout.Content>
+       </Layout>
+     </Layout>
     );
   }
 }

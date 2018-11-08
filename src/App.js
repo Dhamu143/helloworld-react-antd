@@ -5,8 +5,13 @@ import { withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
+import { Layout } from 'antd';
+
 import Entrance from './Entrance';
 import Session from './Session';
+
+import 'antd/dist/antd.css';
+import './App.css';
 
 const withStore = connect((state) => ({
   authenticated: state.Auth.authenticated,
@@ -21,11 +26,11 @@ class App extends Component {
     const { authenticated } = this.props;
 
     return (
-      <div className="-x-fit">
+      <Layout style={{ minHeight: '100vh' }}>
         {authenticated && <Session />}
 
         {!authenticated && <Entrance />}
-      </div>
+      </Layout>
     );
   }
 }

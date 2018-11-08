@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Button, TextField } from '@material-ui/core';
+// import { Button, TextField } from '@material-ui/core';
+
+import { Form, Icon, Input, Button } from 'antd';
 
 import * as $validate from '../common/validate';
 
@@ -57,54 +59,33 @@ class LoginView extends Component {
     const { processing } = this.props;
 
     return (
-      <div>
-        <form style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column' }}>
-          <TextField
-            label="Email"
-            id="username"
-            autoComplete="current-username"
-            margin="dense"
+      <Form>
+        <Form.Item>
+          <Input
+            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="Username"
             value={username}
-            error={!!error.username}
-            helperText={error.username}
-            onBlur={(event) => this.handleInputValidation(event.target.value, event.target.id, [$validate.required, $validate.email])
-            }
             onChange={(event) => this.handleInputChange(event)}
           />
-
-          <TextField
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            margin="dense"
+        </Form.Item>
+        <Form.Item>
+          <Input
+            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            type="password" placeholder="Password"
             value={password}
-            error={!!error.password}
-            helperText={error.password}
-            onBlur={(event) => this.handleInputValidation(event.target.value, event.target.id, [$validate.required, $validate.password])
-            }
             onChange={(event) => this.handleInputChange(event)}
           />
-        </form>
-
-        <Button
-          className="btn-accent -fill-width"
-          style={{ marginTop: 8 }}
-          disabled={processing}
-          onClick={() => this.login()}
-        >
-          Login
-        </Button>
-
-        <div style={{ marginTop: 16 }}>
-          <Button component={Link} to="/signup" className="text-white">
-            Signup
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            onClick={() => this.login()}
+          >
+            Log in
           </Button>
-          <Button component={Link} to="/reset" className="text-white">
-            Reset
-          </Button>
-        </div>
-      </div>
+        </Form.Item>
+      </Form>
     );
   }
 }
