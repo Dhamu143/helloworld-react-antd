@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-// import { Button, TextField } from '@material-ui/core';
-
-import { Form, Icon, Input, Button } from 'antd';
+import {
+  Form, Icon, Input, Button,
+} from 'antd';
 
 import * as $validate from '../common/validate';
 
@@ -71,17 +71,14 @@ class LoginView extends Component {
         <Form.Item>
           <Input
             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-            type="password" placeholder="Password"
+            type="password"
+            placeholder="Password"
             value={password}
             onChange={(event) => this.handleInputChange(event)}
           />
         </Form.Item>
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            onClick={() => this.login()}
-          >
+          <Button type="primary" htmlType="submit" onClick={() => this.login()}>
             Log in
           </Button>
         </Form.Item>

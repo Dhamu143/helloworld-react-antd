@@ -5,8 +5,9 @@ import {
   Switch, Route, Redirect, Link, withRouter,
 } from 'react-router-dom';
 
-
-import { Layout, Menu, Icon, Avatar, Popover } from 'antd';
+import {
+  Layout, Menu, Icon, Avatar, Dropdown, Button, Col, Row,
+} from 'antd';
 
 import { connect } from 'react-redux';
 
@@ -28,10 +29,6 @@ const withStore = connect(
       dispatch($logout())
         .then(() => console.info('Goodbye!'))
         .catch((error) => console.log('oops!', error.message));
-
-      // dispatch($logout())
-      //   .then(() => dispatch(Activity.$toast('success', 'Goodbye!')))
-      //   .catch((error) => dispatch(Activity.$toast('failure', error.message)));
     },
   }),
 );
@@ -41,32 +38,21 @@ const Connector = (C) => withRouter(withStore(C));
 
 const drawerWidth = 300;
 
-const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-const styles = {
-  swipeableDrawerPaper: {
-    width: drawerWidth,
-  },
-  menuButton: {
-    marginLeft: -24,
-    marginRight: 16,
-  },
-};
-
 // eslint-disable-next-line
 class Session extends Component {
   state = {
     collapsed: false,
     swipeableDrawerCallapsed: false,
+    selectedKey: 'home',
     navigationMenuItems: [
       {
-        key: '1',
+        key: 'home',
         title: 'Home',
         icon: 'home',
         route: '/home',
       },
       {
-        key: '2',
+        key: 'profile',
         title: 'Profile',
         icon: 'user',
         route: '/profile',
@@ -74,9 +60,9 @@ class Session extends Component {
     ],
   };
 
-  toggleDrawer = (open) => () => {
+  handleClick = (e) => {
     this.setState({
-      swipeableDrawerCallapsed: open,
+      selectedKey: e.key,
     });
   };
 
@@ -84,95 +70,109 @@ class Session extends Component {
     this.setState({
       collapsed: !this.state.collapsed,
     });
-  }
+  };
 
   render() {
     const text = <span>Title</span>;
     const content = (
-      <Menu mode="horizontal">
+      <Menu style={{ padding: 10, width: 160 }} onClick={this.handleClick}>
+        <Menu.Item key="profile">
+          <Link to="/profile">Mon profile</Link>
+        </Menu.Item>
+
         <Menu.Item onClick={() => logout()}>
-          <Icon type="logout" />
+          <Icon type="export" />
           <span>Logout</span>
         </Menu.Item>
       </Menu>
     );
-
     const { collapsed, navigationMenuItems } = this.state;
     const { user, logout } = this.props;
     return (
       <Layout>
-       <Layout.Sider
-         trigger={null}
-         collapsible
-         collapsed={collapsed}
-       >
-         <div className="logo" />
-         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-           {navigationMenuItems.map((navigationMenuItem) => (
-             <Menu.Item key={navigationMenuItem.key}>
-              <Link to={navigationMenuItem.route}>
-                <Icon type={navigationMenuItem.icon} />
-                <span>{navigationMenuItem.title}</span>
-               </Link>
-             </Menu.Item>
-           ))}
-           <Menu.SubMenu title={<span><Icon type="setting" /><span>Navigation</span></span>}>
-            <Menu.Item key="3">
-              <Link to="option1">
-                <span>Option 1</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="4">
-              <Link to="option2">
-                <span>Option 2</span>
-              </Link>
-            </Menu.Item>
-          </Menu.SubMenu>
-         </Menu>
-       </Layout.Sider>
-       <Layout>
-         <Layout.Header
-           style={{
-            background: '#fff',
-            padding: 0,
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}
+        <Layout.Sider trigger={null} collapsible collapsed={collapsed}>
+          <div className="logo" />
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={[this.state.selectedKey]}
+            selectedKeys={[this.state.selectedKey]}
+            onClick={this.handleClick}
           >
-           <Icon
-             style={{
-               paddingTop: 21,
-               paddingLeft: 21,
-               fontSize: 18,
-               cursor: 'pointer',
-             }}
-             type={collapsed ? 'menu-unfold' : 'menu-fold'}
-             onClick={this.toggle}
-           />
-           <div style={{ flex: 1 }} />
-           <Avatar style={{ margin: 'auto', backgroundColor:'#00e8ba'}}>
-            {user.name.substring(0,2).toUpperCase()}
-           </Avatar>
-           <Popover
-              placement="bottomRight"
-              content={content}
-              trigger="click"
+            {navigationMenuItems.map((navigationMenuItem) => (
+              <Menu.Item key={navigationMenuItem.key}>
+                <Link to={navigationMenuItem.route}>
+                  <Icon type={navigationMenuItem.icon} />
+                  <span>{navigationMenuItem.title}</span>
+                </Link>
+              </Menu.Item>
+            ))}
+            <Menu.SubMenu
+              title={(
+                <span>
+                  <Icon type="setting" />
+                  <span>Navigation</span>
+                </span>
+)}
             >
-              <Icon style={{paddingRight: 16, paddingLeft:16 ,paddingTop: 24, cursor: 'pointer'}} type="down" />
-           </Popover>
-         </Layout.Header>
-         <Layout.Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-           <Switch>
-             <Route exact path="/home" component={HomeView} />
-             <Route exact path="/profile" component={ProfileView} />
-             <Route exact path="/option1" component={Option1View} />
-             <Route exact path="/option2" component={Option2View} />
-             <Redirect exact from="/*" to="/home" />
-           </Switch>
-         </Layout.Content>
-       </Layout>
-     </Layout>
+              <Menu.Item key="option1">
+                <Link to="option1">
+                  <span>Option 1</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="option2">
+                <Link to="option2">
+                  <span>Option 2</span>
+                </Link>
+              </Menu.Item>
+            </Menu.SubMenu>
+          </Menu>
+        </Layout.Sider>
+        <Layout>
+          <Layout.Header style={{ background: '#fff' }}>
+            <Row>
+              <Col xs={14} sm={14} md={14} lg={20} xl={20}>
+                <Icon
+                  style={{
+                    fontSize: 18,
+                    cursor: 'pointer',
+                  }}
+                  type={collapsed ? 'menu-unfold' : 'menu-fold'}
+                  onClick={this.toggle}
+                />
+              </Col>
+              <Col xs={10} sm={10} md={10} lg={4} xl={4}>
+                <div style={{ position: 'absolute', right: '0' }}>
+                  <Dropdown overlay={content} trigger={['click']}>
+                    <Button size="large" style={{ border: 'none', overflow: 'none' }}>
+                      <Avatar style={{ margin: 'auto', backgroundColor: '#00e8ba' }}>
+                        {user.name.substring(0, 2).toUpperCase()}
+                      </Avatar>
+                      <Icon type="down" />
+                    </Button>
+                  </Dropdown>
+                </div>
+              </Col>
+            </Row>
+          </Layout.Header>
+          <Layout.Content
+            style={{
+              margin: '24px 16px',
+              padding: 24,
+              background: '#fff',
+              minHeight: 280,
+            }}
+          >
+            <Switch>
+              <Route exact path="/home" component={HomeView} />
+              <Route exact path="/profile" component={ProfileView} />
+              <Route exact path="/option1" component={Option1View} />
+              <Route exact path="/option2" component={Option2View} />
+              <Redirect exact from="/*" to="/home" />
+            </Switch>
+          </Layout.Content>
+        </Layout>
+      </Layout>
     );
   }
 }

@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { COLOR } from '../common/styles';
-
 import { Layout, Card } from 'antd';
 
 import LoginView from './LoginView';
-import SignupView from './SignupView';
-import ResetView from './ResetView';
 
 import LOGO from '../assets/logo.png';
 
@@ -18,18 +14,16 @@ class Entrance extends Component {
     return (
       <Layout
         style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
       >
-        <Card style={{ width: 300 }} >
+        <Card style={{ width: 300 }}>
           <img src={LOGO} alt="logo" style={{ margin: 16, width: 100 }} />
           <Switch>
             <Route exact path="/login" component={LoginView} />
-            <Route exact path="/signup" component={SignupView} />
-            <Route exact path="/reset" component={ResetView} />
             <Redirect exact from="/*" to="/login" />
           </Switch>
         </Card>
