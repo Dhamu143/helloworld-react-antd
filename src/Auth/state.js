@@ -1,4 +1,9 @@
+import * as Logger from '../common/logger';
+import * as StateHelper from '../common/state.helper';
+import * as FetchHelper from '../common/fetch.helper';
+
 import * as Activity from '../Shared/Activity.state';
+import { $ready, $initialize } from '../Shared/state';
 
 import { AuthService } from './Auth.service';
 
@@ -38,7 +43,7 @@ function loginFailure(error) {
       type: AUTH_LOGIN_FAILURE,
     });
 
-    // dispatch(Activity.$message(error.message));
+    dispatch(Activity.$message(error.message));
 
     throw error;
   };
@@ -51,6 +56,7 @@ export function $login(username, password) {
 
     return AuthService.login(username, password)
       .then((result) => dispatch(loginSuccess(result)))
+      .then((result) => dispatch($initialize()).then(() => result))
       .catch((error) => dispatch(loginFailure(error)))
       .finally(() => dispatch(Activity.$done(MODULE, $login.name)));
   };
@@ -104,7 +110,7 @@ function signupFailure(error) {
       type: AUTH_SIGNUP_FAILURE,
     });
 
-    // dispatch(Activity.$message(error.message));
+    dispatch(Activity.$message(error.message));
 
     throw error;
   };
@@ -123,23 +129,23 @@ export function $signup(payload) {
 }
 
 /**
- * Account Recovery
+ * Password Reset
  */
 
-const AUTH_RECOVERY_REQUEST = 'AUTH_RECOVERY_REQUEST';
+const AUTH_INITIATE_PASSWORD_RESET_REQUEST = 'AUTH_INITIATE_PASSWORD_RESET_REQUEST';
 
-function initiateAccountRecoveryRequest() {
+function initiatePasswordResetRequest() {
   return {
-    type: AUTH_RECOVERY_REQUEST,
+    type: AUTH_INITIATE_PASSWORD_RESET_REQUEST,
   };
 }
 
-const AUTH_RECOVERY_SUCCESS = 'AUTH_RECOVERY_SUCCESS';
+const AUTH_INITIATE_PASSWORD_RESET_SUCCESS = 'AUTH_INITIATE_PASSWORD_RESET_SUCCESS';
 
-function initiateAccountRecoverySuccess({ ...rest }) {
+function initiatePasswordResetSuccess({ ...rest }) {
   return (dispatch) => {
     dispatch({
-      type: AUTH_RECOVERY_SUCCESS,
+      type: AUTH_INITIATE_PASSWORD_RESET_SUCCESS,
       ...rest,
     });
 
@@ -147,29 +153,29 @@ function initiateAccountRecoverySuccess({ ...rest }) {
   };
 }
 
-const AUTH_RECOVERY_FAILURE = 'AUTH_RECOVERY_FAILURE';
+const AUTH_INITIATE_PASSWORD_RESET_FAILURE = 'AUTH_INITIATE_PASSWORD_RESET_FAILURE';
 
-function initiateAccountRecoveryFailure(error) {
+function initiatePasswordResetFailure(error) {
   return (dispatch) => {
     dispatch({
-      type: AUTH_RECOVERY_FAILURE,
+      type: AUTH_INITIATE_PASSWORD_RESET_FAILURE,
     });
 
-    // dispatch(Activity.$message(error.message));
+    dispatch(Activity.$message(error.message));
 
     throw error;
   };
 }
 
-export function $initiateAccountRecovery(email) {
+export function $initiatePasswordReset(email) {
   return (dispatch) => {
-    dispatch(Activity.$processing(MODULE, $initiateAccountRecovery.name, { message: 'Singing up ...' }));
-    dispatch(initiateAccountRecoveryRequest());
+    dispatch(Activity.$processing(MODULE, $initiatePasswordReset.name, { message: 'Singing up ...' }));
+    dispatch(initiatePasswordResetRequest());
 
-    return AuthService.initiateAccountRecovery(email)
-      .then((result) => dispatch(initiateAccountRecoverySuccess(result)))
-      .catch((error) => dispatch(initiateAccountRecoveryFailure(error)))
-      .finally(() => dispatch(Activity.$done(MODULE, $initiateAccountRecovery.name)));
+    return AuthService.initiatePasswordReset(email)
+      .then((result) => dispatch(initiatePasswordResetSuccess(result)))
+      .catch((error) => dispatch(initiatePasswordResetFailure(error)))
+      .finally(() => dispatch(Activity.$done(MODULE, $initiatePasswordReset.name)));
   };
 }
 
@@ -221,15 +227,24 @@ export function persister({ authenticated, user }) {
 }
 
 export async function initializer({ dispatch, getState }) {
+  FetchHelper.events.on('failure', (error, response) => {
+    if (AuthService.isAuthenticated() && response.status === 401) {
+      dispatch($login(AuthService.username, AuthService.password)).catch((error) => {
+        dispatch(Activity.$toast('failure', error.message));
+        dispatch($logout());
+      });
+    }
+  });
+
   await AuthService.initialize();
 
   if (AuthService.isAuthenticated()) {
-    // dispatch($initialize()).catch((error) => dispatch(Activity.$toast('failure', error.message)));
+    dispatch($initialize()).catch((error) => dispatch(Activity.$toast('failure', error.message)));
   } else if (getState().Auth.authenticated) {
     dispatch({
       type: AUTH_LOGOUT,
     });
   }
 
-  dispatch(Activity.$done());
+  dispatch($ready());
 }

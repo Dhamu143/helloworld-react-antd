@@ -1,5 +1,3 @@
-import './common';
-
 import React from 'react';
 
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -11,11 +9,11 @@ import App from './App';
 
 // import { theme } from './common/theme';
 
-import { setupStore } from './common/state';
+import { setupStore } from './store';
 
 const store = setupStore();
 
-const Root = () => (
+const AppContainer = () => (
   <Provider store={store}>
     <Router>
       <App />
@@ -23,4 +21,4 @@ const Root = () => (
   </Provider>
 );
 
-export default Root;
+export default AppContainer;

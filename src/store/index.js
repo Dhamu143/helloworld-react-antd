@@ -1,3 +1,9 @@
+/**
+ * Store
+ *
+ * This module is for state store definition
+ */
+
 import {
   combineReducers, createStore, applyMiddleware, compose,
 } from 'redux';
@@ -6,11 +12,17 @@ import { createLogger } from 'redux-logger';
 import persistState, { mergePersistedState } from 'redux-localstorage';
 import persistAdapter from 'redux-localstorage/lib/adapters/localStorage';
 
-import $state from './state.definition';
+import $state from './state';
 
 /**
  * define root reducer
  */
+
+// let reducer = combineReducers({
+//   Activity: $state.Activity.reducer,
+//   Auth: $state.Auth.reducer,
+//   // ...
+// });
 
 let reducer = combineReducers(
   Object.entries($state).reduce((result, [name, substate]) => {
@@ -32,6 +44,11 @@ reducer = compose(mergePersistedState())(reducer);
 /**
  * define persistence
  */
+
+// const persistSelector = (state) => ({
+//   Auth: $state.Auth.persister(state.Auth),
+//   // ...
+// });
 
 const persistSelector = (state) => Object.entries($state).reduce((result, [name, substate]) => {
   return substate.persister

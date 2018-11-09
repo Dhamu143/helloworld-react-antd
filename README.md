@@ -1,6 +1,6 @@
 # React Starter
 
-A boilerplate and reference implementation for web applications built with React, Redux, and React Material.
+A boilerplate and reference implementation for web applications built with React, Redux, and Ant Design.
 
 ## References
 

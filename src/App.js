@@ -10,9 +10,6 @@ import { Layout } from 'antd';
 import Entrance from './Entrance';
 import Session from './Session';
 
-import 'antd/dist/antd.css';
-import './App.css';
-
 const withStore = connect((state) => ({
   authenticated: state.Auth.authenticated,
 }));
