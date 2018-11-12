@@ -9819,7 +9819,7 @@ stack-utils@^1.0.1:
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.1.tgz#d4f33ab54e8e38778b0ca5cfd3b3afb12db68620"
   integrity sha1-1PM6tU6OOHeLDKXP07OvsS22hiA=
 
-"starter-lib@git+https://github.com/emiketic/emiketic-starter-lib.git#0.3.0":
+"starter-lib@git+https://github.com/emiketic/emiketic-starter-lib.git#0.3.1":
   version "0.3.0"
   resolved "git+https://github.com/emiketic/emiketic-starter-lib.git#a573cf1c638387d83a6b15013cafc160c0f0d117"
   dependencies:
