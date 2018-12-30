@@ -1,9 +1,11 @@
 {
   "name": "Hello World",
   "short_name": "Hello World",
-  "description": "Some slogan here!",
+  "description": "...",
   "start_url": "./index.html",
   "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#607D8B",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,7 +22,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "background_color": "#FFFFFF",
-  "theme_color": "#607D8B"
+  ]
 }

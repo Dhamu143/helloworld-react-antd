@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { LocaleProvider } from 'antd';
-import locale from 'antd/lib/locale-provider/en_US';
+import frFR from 'antd/lib/locale-provider/fr_FR';
 
 import App from './App';
 
@@ -13,7 +13,7 @@ import { setupStore } from './store';
 const store = setupStore();
 
 const AppContainer = () => (
-  <LocaleProvider locale={locale}>
+  <LocaleProvider locale={frFR}>
     <Provider store={store}>
       <Router>
         <App />

@@ -12,8 +12,6 @@ import {
 import { connect } from 'react-redux';
 
 import ProfileView from './ProfileView';
-import Option1View from './Option1View';
-import Option2View from './Option2View';
 import HomeRouter from '../Home';
 
 import { $logout } from '../Auth/state';
@@ -162,8 +160,6 @@ class Session extends Component {
             <Switch>
               <Route path="/home" component={HomeRouter} />
               <Route exact path="/profile" component={ProfileView} />
-              <Route exact path="/option1" component={Option1View} />
-              <Route exact path="/option2" component={Option2View} />
               <Redirect exact from="/*" to="/home" />
             </Switch>
           </Layout.Content>
