@@ -3,37 +3,40 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.10.7",
-    "promise.prototype.finally": "3.1.0",
-    "prop-types": "15.6.2",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "react-redux": "5.1.1",
-    "react-router-dom": "4.3.1",
-    "react-scripts": "2.1.1",
-    "redux": "4.0.1",
+    "antd": "~3.11.6",
+    "promise.prototype.finally": "~3.1.0",
+    "prop-types": "~15.6.2",
+    "react": "~16.7.0",
+    "react-dom": "~16.7.0",
+    "react-redux": "~6.0.0",
+    "react-router-dom": "~4.3.1",
+    "react-scripts": "~2.1.2",
+    "redux": "~4.0.1",
     "redux-localstorage": "1.0.0-rc5",
-    "redux-logger": "3.0.6",
-    "redux-thunk": "2.3.0",
-    "starter-lib": "git+https://github.com/emiketic/emiketic-starter-lib.git#0.3.1"
+    "redux-logger": "~3.0.6",
+    "redux-thunk": "~2.3.0",
+    "starter-lib": "git+https://github.com/emiketic/emiketic-starter-lib.git#0.3.11"
   },
   "scripts": {
     "start": "react-scripts start",
     "lint": "eslint --ext .js ./",
     "lint:critical": "eslint --no-eslintrc --config .eslintrc.critical.json ./",
-    "format": "npm run format:all ; npm run format:js",
+    "format": "npm run format:all && npm run format:js",
     "format:all": "prettier --ignore-path .gitignore ./**/*.{md,json,js,css,scss} --write",
-    "format:js": "eslint --ignore-path .gitignore --ext .js --fix ./",
+    "format:js": "eslint -o /dev/null --ignore-path .gitignore --ext .js --fix ./ || true",
     "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile ./jest.setup.js",
-    "build": "react-scripts build "
+    "build": "react-scripts build",
+    "prebuild": "npm run build-antd",
+    "build-antd": "lessc ./src/antd.less ./src/antd.custom.css"
   },
   "devDependencies": {
     "babel-eslint": "10.0.1",
-    "eslint": "5.9.0",
+    "eslint": "~5.11.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.2",
     "eslint-plugin-react": "7.11.1",
-    "prettier": "1.15.2"
+    "less": "~2.7.3",
+    "prettier": "~1.15.3"
   }
 }

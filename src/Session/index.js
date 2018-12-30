@@ -33,12 +33,8 @@ const withStore = connect(
   }),
 );
 
-// provides route prcops and rerender on route change, provides shared state and actions as props;
-const Connector = (C) => withRouter(withStore(C));
+const Wrapper = (C) => withRouter(withStore(C));
 
-const drawerWidth = 300;
-
-// eslint-disable-next-line
 class Session extends Component {
   state = {
     collapsed: false,
@@ -182,4 +178,4 @@ Session.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-export default Connector(Session);
+export default Wrapper(Session);

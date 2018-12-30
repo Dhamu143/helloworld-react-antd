@@ -5,35 +5,34 @@ import { withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { Layout } from 'antd';
-
+import LandingView from './Entrance/LandingView';
 import Entrance from './Entrance';
 import Session from './Session';
 
 const withStore = connect((state) => ({
+  ready: state.Shared.ready,
   authenticated: state.Auth.authenticated,
 }));
 
-// provides route prcops and rerender on route change, provides shared state and actions as props;
-const Connector = (C) => withRouter(withStore(C));
+const Wrapper = (C) => withRouter(withStore(C));
 
-// eslint-disable-next-line
 class App extends Component {
+  state = {};
+
   render() {
-    const { authenticated } = this.props;
+    const { ready, authenticated } = this.props;
 
-    return (
-      <Layout style={{ minHeight: '100vh' }}>
-        {authenticated && <Session />}
+    if (!ready) {
+      return <LandingView />;
+    }
 
-        {!authenticated && <Entrance />}
-      </Layout>
-    );
+    return authenticated ? <Session /> : <Entrance />;
   }
 }
 
 App.propTypes = {
+  ready: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,
 };
 
-export default Connector(App);
+export default Wrapper(App);

@@ -8,8 +8,9 @@ import LoginView from './LoginView';
 
 import LOGO from '../assets/logo.png';
 
-// eslint-disable-next-line
 class Entrance extends Component {
+  static = {};
+
   render() {
     return (
       <Layout
