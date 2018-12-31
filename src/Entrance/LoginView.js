@@ -41,14 +41,13 @@ class LoginView extends Component {
   }
 
   handleInputValidation(value, key, rules) {
-    $validate.exec(value, rules, (error) => {
-      const _error = {
-        [key]: error,
-      };
+    const error = $validate.exec(value, rules);
 
-      this.setState({
-        error: { ...this.state.error, ..._error },
-      });
+    this.setState({
+      error: {
+        ...this.state.error,
+        [key]: error,
+      },
     });
   }
 
