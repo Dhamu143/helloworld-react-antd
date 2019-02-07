@@ -22,8 +22,8 @@ const Wrapper = (C) => withStore(C);
 
 class LoginView extends Component {
   state = {
-    username: process.env.NODE_ENV === 'development' ? 'test@example.com' : '',
-    password: process.env.NODE_ENV === 'development' ? 'test' : '',
+    username: '',
+    password: '',
     error: {
       username: null,
       password: null,
@@ -63,7 +63,7 @@ class LoginView extends Component {
           <Input
             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
             placeholder="Username"
-            value={username}
+            defaultValue={username}
             onChange={(event) => this.handleInputChange(event)}
           />
         </Form.Item>
@@ -72,7 +72,7 @@ class LoginView extends Component {
             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="password"
             placeholder="Password"
-            value={password}
+            defaultValue={password}
             onChange={(event) => this.handleInputChange(event)}
           />
         </Form.Item>
