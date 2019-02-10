@@ -38,7 +38,7 @@ class LoginView extends Component {
 
   handleInputChange(event) {
     this.setState({
-      [event.target.id]: event.target.value,
+      [event.target.name]: event.target.value,
     });
   }
 
@@ -61,19 +61,21 @@ class LoginView extends Component {
       <Form>
         <Form.Item>
           <Input
+            name="username"
             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
             placeholder="Username"
             defaultValue={username}
-            onChange={(event) => this.handleInputChange(event)}
+            onChange={(e) => this.handleInputChange(e)}
           />
         </Form.Item>
         <Form.Item>
           <Input
+            name="password"
             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="password"
             placeholder="Password"
             defaultValue={password}
-            onChange={(event) => this.handleInputChange(event)}
+            onChange={(e) => this.handleInputChange(e)}
           />
         </Form.Item>
         <Form.Item>

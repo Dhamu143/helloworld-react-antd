@@ -3,11 +3,6 @@
 /* stylelint-disable */
 /* stylelint-disable declaration-bang-space-before,no-duplicate-selectors,string-no-newline */
 /* stylelint-disable at-rule-no-unknown */
-@font-face {
-  font-family: 'Chinese Quote';
-  src: local('PingFang SC'), local('SimSun');
-  unicode-range: U+2018, U+2019, U+201c, U+201d;
-}
 html,
 body {
   width: 100%;
@@ -48,11 +43,11 @@ section {
 }
 body {
   margin: 0;
-  font-family: 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   background-color: #fff;
@@ -154,7 +149,7 @@ a {
 }
 a:focus {
   text-decoration: underline;
-  text-decoration-skip: ink;
+  text-decoration-skip-ink: auto;
 }
 a:hover {
   color: #40a9ff;
@@ -354,6 +349,9 @@ mark {
 }
 .anticon .anticon-icon {
   display: block;
+}
+.anticon[tabindex] {
+  cursor: pointer;
 }
 .anticon-spin:before {
   display: inline-block;
@@ -625,11 +623,11 @@ mark {
     transform: rotate(360deg);
   }
 }
-[ant-click-animating],
-[ant-click-animating-without-extra-node] {
+[ant-click-animating='true'],
+[ant-click-animating-without-extra-node='true'] {
   position: relative;
 }
-[ant-click-animating-without-extra-node]:after,
+[ant-click-animating-without-extra-node='true']:after,
 .ant-click-animating-node {
   content: '';
   position: absolute;
@@ -924,6 +922,7 @@ mark {
 .zoom-enter,
 .zoom-appear {
   transform: scale(0);
+  opacity: 0;
   animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 .zoom-leave {
@@ -953,6 +952,7 @@ mark {
 .zoom-big-enter,
 .zoom-big-appear {
   transform: scale(0);
+  opacity: 0;
   animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 .zoom-big-leave {
@@ -982,6 +982,7 @@ mark {
 .zoom-big-fast-enter,
 .zoom-big-fast-appear {
   transform: scale(0);
+  opacity: 0;
   animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 .zoom-big-fast-leave {
@@ -1011,6 +1012,7 @@ mark {
 .zoom-up-enter,
 .zoom-up-appear {
   transform: scale(0);
+  opacity: 0;
   animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 .zoom-up-leave {
@@ -1040,6 +1042,7 @@ mark {
 .zoom-down-enter,
 .zoom-down-appear {
   transform: scale(0);
+  opacity: 0;
   animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 .zoom-down-leave {
@@ -1069,6 +1072,7 @@ mark {
 .zoom-left-enter,
 .zoom-left-appear {
   transform: scale(0);
+  opacity: 0;
   animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 .zoom-left-leave {
@@ -1098,6 +1102,7 @@ mark {
 .zoom-right-enter,
 .zoom-right-appear {
   transform: scale(0);
+  opacity: 0;
   animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
 }
 .zoom-right-leave {
@@ -1128,6 +1133,7 @@ mark {
     transform: scale(0.8);
   }
   100% {
+    opacity: 1;
     transform: scale(1);
   }
 }
@@ -1241,6 +1247,7 @@ mark {
 .ant-alert {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -1391,6 +1398,7 @@ mark {
 .ant-anchor {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -1466,6 +1474,7 @@ mark {
 .ant-select-auto-complete {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -1513,6 +1522,7 @@ mark {
   opacity: 1;
   cursor: not-allowed;
   color: rgba(0, 0, 0, 0.25);
+  background-color: transparent;
 }
 .ant-select-auto-complete.ant-select .ant-input[disabled]:hover {
   border-color: #e6d8d8;
@@ -1537,6 +1547,7 @@ mark {
 .ant-avatar {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -1606,6 +1617,7 @@ mark {
 .ant-back-top {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -1654,6 +1666,7 @@ mark {
 .ant-badge {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -1811,6 +1824,7 @@ mark {
 }
 .ant-breadcrumb {
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -2535,6 +2549,24 @@ mark {
   right: 0;
   background: transparent;
 }
+.ant-btn-round {
+  padding: 0 16px;
+  font-size: 16px;
+  border-radius: 32px;
+  height: 32px;
+}
+.ant-btn-round.ant-btn-lg {
+  padding: 0 20px;
+  font-size: 18px;
+  border-radius: 40px;
+  height: 40px;
+}
+.ant-btn-round.ant-btn-sm {
+  padding: 0 12px;
+  font-size: 14px;
+  border-radius: 24px;
+  height: 24px;
+}
 .ant-btn-circle,
 .ant-btn-circle-outline {
   width: 32px;
@@ -2988,6 +3020,7 @@ a.ant-btn-sm {
 .ant-fullcalendar {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -2997,8 +3030,12 @@ a.ant-btn-sm {
   outline: none;
   border-top: 1px solid #d9d9d9;
 }
-.ant-fullcalendar-month-select {
-  margin-left: 5px;
+.ant-select.ant-fullcalendar-year-select {
+  min-width: 90px;
+}
+.ant-select.ant-fullcalendar-month-select {
+  margin-left: 8px;
+  min-width: 80px;
 }
 .ant-fullcalendar-header {
   padding: 11px 16px 11px 0;
@@ -3207,6 +3244,7 @@ a.ant-btn-sm {
 .ant-card {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -3516,6 +3554,7 @@ a.ant-btn-sm {
 .ant-carousel {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -3721,6 +3760,7 @@ a.ant-btn-sm {
 .ant-cascader {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -3740,6 +3780,7 @@ a.ant-btn-sm {
 .ant-cascader-picker {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -3941,6 +3982,7 @@ a.ant-btn-sm {
 .ant-checkbox {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -3992,10 +4034,10 @@ a.ant-btn-sm {
   border-collapse: separate;
 }
 .ant-checkbox-inner:after {
-  transform: rotate(45deg) scale(0);
+  transform: rotate(45deg) scale(0) translate(-50%, -50%);
   position: absolute;
-  left: 4.57142857px;
-  top: 1.14285714px;
+  top: 50%;
+  left: 21%;
   display: table;
   width: 5.71428571px;
   height: 9.14285714px;
@@ -4019,7 +4061,7 @@ a.ant-btn-sm {
   height: 100%;
 }
 .ant-checkbox-checked .ant-checkbox-inner:after {
-  transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1) translate(-50%, -50%);
   position: absolute;
   display: table;
   border: 2px solid #fff;
@@ -4059,6 +4101,7 @@ a.ant-btn-sm {
 .ant-checkbox-wrapper {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -4080,6 +4123,7 @@ a.ant-btn-sm {
 .ant-checkbox-group {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -4120,6 +4164,7 @@ a.ant-btn-sm {
 .ant-collapse {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -4146,7 +4191,7 @@ a.ant-btn-sm {
   position: relative;
   transition: all 0.3s;
 }
-.ant-collapse > .ant-collapse-item > .ant-collapse-header .arrow {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
   font-style: normal;
   vertical-align: -0.125em;
   text-align: center;
@@ -4161,30 +4206,30 @@ a.ant-btn-sm {
   line-height: 46px;
   vertical-align: top;
   top: 50%;
+  margin-top: 2px;
   transform: translateY(-50%);
   left: 16px;
 }
-.ant-collapse > .ant-collapse-item > .ant-collapse-header .arrow > * {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow > * {
   line-height: 1;
 }
-.ant-collapse > .ant-collapse-item > .ant-collapse-header .arrow svg {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow svg {
   display: inline-block;
 }
-.ant-collapse > .ant-collapse-item > .ant-collapse-header .arrow:before {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow:before {
   display: none;
 }
 .ant-collapse
   > .ant-collapse-item
   > .ant-collapse-header
-  .arrow
+  .ant-collapse-arrow
   .ant-collapse
   > .ant-collapse-item
   > .ant-collapse-header
-  .arrow-icon {
+  .ant-collapse-arrow-icon {
   display: block;
 }
-.ant-collapse > .ant-collapse-item > .ant-collapse-header .arrow svg {
-  transform: rotate(0);
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow svg {
   transition: transform 0.24s;
 }
 .ant-collapse > .ant-collapse-item > .ant-collapse-header:focus {
@@ -4210,9 +4255,6 @@ a.ant-btn-sm {
 }
 .ant-collapse-item:last-child > .ant-collapse-content {
   border-radius: 0 0 4px 4px;
-}
-.ant-collapse > .ant-collapse-item > .ant-collapse-header[aria-expanded='true'] .anticon-right svg {
-  transform: rotate(90deg);
 }
 .ant-collapse-borderless {
   background-color: #fff;
@@ -4319,15 +4361,15 @@ a.ant-btn-sm {
 .ant-calendar-picker-container {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   list-style: none;
-  font-family: 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   position: absolute;
   z-index: 1050;
 }
@@ -4354,6 +4396,7 @@ a.ant-btn-sm {
 .ant-calendar-picker {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -4412,7 +4455,6 @@ a.ant-btn-sm {
   pointer-events: auto;
 }
 .ant-calendar-picker-icon {
-  font-family: 'anticon';
   font-size: 14px;
   color: rgba(0, 0, 0, 0.25);
   display: inline-block;
@@ -5791,6 +5833,7 @@ li.ant-calendar-time-picker-select-option-disabled:hover {
 .ant-divider {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -6047,6 +6090,7 @@ li.ant-calendar-time-picker-select-option-disabled:hover {
 .ant-dropdown {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -6067,6 +6111,7 @@ li.ant-calendar-time-picker-select-option-disabled:hover {
   bottom: -7px;
   content: ' ';
   opacity: 0.0001;
+  z-index: -9999;
 }
 .ant-dropdown-wrap {
   position: relative;
@@ -6329,6 +6374,7 @@ li.ant-calendar-time-picker-select-option-disabled:hover {
 .ant-form {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -6386,7 +6432,7 @@ li.ant-calendar-time-picker-select-option-disabled:hover {
   display: inline-block;
   margin-right: 4px;
   content: '*';
-  font-family: SimSun;
+  font-family: SimSun, sans-serif;
   line-height: 1;
   font-size: 14px;
   color: #f5222d;
@@ -6413,6 +6459,7 @@ input[type='checkbox'].disabled {
 .ant-form-item {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -10450,6 +10497,7 @@ form .ant-input-group-wrapper {
 }
 .ant-input {
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -10517,6 +10565,7 @@ textarea.ant-input {
 .ant-input-group {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -10768,6 +10817,7 @@ textarea.ant-input {
 .ant-input-affix-wrapper {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -10828,24 +10878,18 @@ textarea.ant-input {
 .ant-input-search-icon:hover {
   color: rgba(0, 0, 0, 0.8);
 }
-.ant-input-search:not(.ant-input-search-small) > .ant-input-suffix {
-  right: 12px;
+.ant-input-search .ant-input-group-addon {
+  border: 0;
+  padding: 0;
 }
-.ant-input-search > .ant-input-suffix > .ant-input-search-button {
+.ant-input-search .ant-input-group-addon .ant-input-search-button {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-}
-.ant-input-search > .ant-input-suffix > .ant-input-search-button > .anticon-search {
-  font-size: 16px;
-}
-.ant-input-search.ant-input-search-enter-button > .ant-input {
-  padding-right: 46px;
-}
-.ant-input-search.ant-input-search-enter-button > .ant-input-suffix {
-  right: 0;
+  width: 100%;
 }
 .ant-input-number {
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   box-sizing: border-box;
   list-style: none;
   position: relative;
@@ -10932,6 +10976,7 @@ textarea.ant-input-number {
 }
 .ant-input-number-handler-up-inner,
 .ant-input-number-handler-down-inner {
+  display: inline-block;
   font-style: normal;
   vertical-align: -0.125em;
   text-align: center;
@@ -10946,10 +10991,6 @@ textarea.ant-input-number {
   width: 12px;
   height: 12px;
   transition: all 0.1s linear;
-  display: inline-block;
-  font-size: 12px;
-  font-size: 7px \9;
-  transform: scale(0.58333333) rotate(0deg);
   right: 4px;
   color: rgba(0, 0, 0, 0.45);
 }
@@ -10970,10 +11011,6 @@ textarea.ant-input-number {
 .ant-input-number-handler-down-inner .ant-input-number-handler-up-inner-icon,
 .ant-input-number-handler-down-inner .ant-input-number-handler-down-inner-icon {
   display: block;
-}
-:root .ant-input-number-handler-up-inner,
-:root .ant-input-number-handler-down-inner {
-  font-size: 12px;
 }
 .ant-input-number:hover {
   border-color: #40a9ff;
@@ -11048,6 +11085,19 @@ textarea.ant-input-number {
   opacity: 0;
   border-radius: 0 4px 4px 0;
   transition: opacity 0.24s linear 0.1s;
+}
+.ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-up-inner,
+.ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-down-inner {
+  display: inline-block;
+  font-size: 12px;
+  font-size: 7px \9;
+  transform: scale(0.58333333) rotate(0deg);
+  min-width: auto;
+  margin-right: 0;
+}
+:root .ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-up-inner,
+:root .ant-input-number-handler-wrap .ant-input-number-handler .ant-input-number-handler-down-inner {
+  font-size: 12px;
 }
 .ant-input-number-handler-wrap:hover .ant-input-number-handler {
   height: 40%;
@@ -11192,6 +11242,7 @@ textarea.ant-input-number {
 .ant-list {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -11240,7 +11291,7 @@ textarea.ant-input-number {
   margin-right: 16px;
 }
 .ant-list-item-meta-content {
-  flex: 1 0;
+  flex: 1 0 auto;
 }
 .ant-list-item-meta-title {
   color: rgba(0, 0, 0, 0.65);
@@ -11300,6 +11351,12 @@ textarea.ant-input-number {
 .ant-list-item-main {
   display: flex;
   flex: 1;
+}
+.ant-list-header {
+  background: transparent;
+}
+.ant-list-footer {
+  background: transparent;
 }
 .ant-list-header,
 .ant-list-footer {
@@ -11442,6 +11499,7 @@ textarea.ant-input-number {
 .ant-mention-wrapper {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -11558,6 +11616,7 @@ textarea.ant-mention-wrapper .ant-mention-editor {
 .ant-mention-dropdown {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -11634,6 +11693,7 @@ textarea.ant-mention-wrapper .ant-mention-editor {
 .ant-menu {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   box-sizing: border-box;
   margin: 0;
@@ -12318,6 +12378,7 @@ textarea.ant-mention-wrapper .ant-mention-editor {
 .ant-message {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -12385,6 +12446,7 @@ textarea.ant-mention-wrapper .ant-mention-editor {
 .ant-modal {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -12599,6 +12661,7 @@ textarea.ant-mention-wrapper .ant-mention-editor {
 .ant-notification {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -12772,6 +12835,7 @@ a.ant-notification-notice-close:focus {
 .ant-pagination {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -12883,6 +12947,7 @@ a.ant-notification-notice-close:focus {
   position: absolute;
   display: block;
   letter-spacing: 2px;
+  text-indent: 0.13em;
   color: rgba(0, 0, 0, 0.25);
   text-align: center;
   opacity: 1;
@@ -13156,6 +13221,7 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-popover {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -13343,6 +13409,7 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-progress {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -13486,6 +13553,7 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-radio-group {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -13498,6 +13566,7 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-radio-wrapper {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -13513,6 +13582,7 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-radio {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -13773,6 +13843,7 @@ span.ant-radio + * {
 .ant-rate {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -13843,6 +13914,7 @@ span.ant-radio + * {
 .ant-select {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -14264,6 +14336,7 @@ span.ant-radio + * {
 }
 .ant-select-dropdown {
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   margin: 0;
@@ -14500,6 +14573,7 @@ span.ant-radio + * {
 .ant-slider {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -14582,7 +14656,7 @@ span.ant-radio + * {
 }
 .ant-slider-handle:focus {
   border-color: #46a6ff;
-  box-shadow: 0 0 0 5px #8cc8ff;
+  box-shadow: 0 0 0 5px rgba(24, 144, 255, 0.2);
   outline: none;
 }
 .ant-slider-handle.ant-tooltip-open {
@@ -14662,6 +14736,7 @@ span.ant-radio + * {
 .ant-spin {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -14744,6 +14819,7 @@ span.ant-radio + * {
   height: 100%;
   width: 100%;
   z-index: 10;
+  display: none \9;
 }
 .ant-spin-blur {
   pointer-events: none;
@@ -14838,9 +14914,45 @@ span.ant-radio + * {
     transform: rotate(405deg);
   }
 }
+.ant-statistic {
+  font-size: 14px;
+  font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ant-statistic-title {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.ant-statistic-content {
+  font-size: 24px;
+  font-family: Tahoma, 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+.ant-statistic-content-value-decimal {
+  font-size: 16px;
+}
+.ant-statistic-content-prefix,
+.ant-statistic-content-suffix {
+  display: inline-block;
+}
+.ant-statistic-content-prefix {
+  margin-right: 4px;
+}
+.ant-statistic-content-suffix {
+  margin-left: 4px;
+  font-size: 16px;
+}
 .ant-steps {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -14880,9 +14992,8 @@ span.ant-radio + * {
   font-size: 16px;
   margin-right: 8px;
   transition: background-color 0.3s, border-color 0.3s;
-  font-family: 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 .ant-steps-item-icon > .ant-steps-icon {
   line-height: 1;
@@ -15342,6 +15453,7 @@ span.ant-radio + * {
 .ant-switch {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   margin: 0;
@@ -15507,6 +15619,7 @@ span.ant-radio + * {
 .ant-table {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -15826,9 +15939,6 @@ span.ant-radio + * {
 .ant-table-bordered.ant-table-fixed-header .ant-table-body-inner > table {
   border-top: 0;
 }
-.ant-table-bordered.ant-table-fixed-header .ant-table-placeholder {
-  border: 0;
-}
 .ant-table-bordered .ant-table-thead > tr:not(:last-child) > th {
   border-bottom: 1px solid #e8e8e8;
 }
@@ -15840,6 +15950,7 @@ span.ant-radio + * {
   position: relative;
   padding: 16px 16px;
   background: #fff;
+  border-radius: 0 0 4px 4px;
   border-bottom: 1px solid #e8e8e8;
   text-align: center;
   font-size: 14px;
@@ -15915,6 +16026,9 @@ span.ant-radio + * {
 .ant-table-filter-dropdown-link.clear {
   float: right;
 }
+.ant-table-selection {
+  white-space: nowrap;
+}
 .ant-table-selection-select-all-custom {
   margin-right: 4px !important;
 }
@@ -15985,6 +16099,9 @@ tr.ant-table-expanded-row td > .ant-table-wrapper {
 .ant-table-scroll table {
   width: auto;
   min-width: 100%;
+}
+.ant-table-scroll table .ant-table-fixed-columns-in-body {
+  visibility: hidden;
 }
 .ant-table-body-inner {
   height: 100%;
@@ -16232,7 +16349,7 @@ tr.ant-table-expanded-row td > .ant-table-wrapper {
   > .ant-table-thead
   > tr
   > th {
-  background-color: #fff;
+  background-color: transparent;
   border-bottom: 1px solid #e8e8e8;
 }
 .ant-table-small > .ant-table-content > .ant-table-header > table > .ant-table-thead > tr > th.ant-table-column-sort,
@@ -16484,6 +16601,7 @@ tr.ant-table-expanded-row td > .ant-table-wrapper {
 .ant-tabs {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -16899,6 +17017,7 @@ tr.ant-table-expanded-row td > .ant-table-wrapper {
 .ant-tag {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -17126,15 +17245,15 @@ tr.ant-table-expanded-row td > .ant-table-wrapper {
 .ant-time-picker-panel {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   list-style: none;
-  font-family: 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   z-index: 1050;
   position: absolute;
 }
@@ -17178,33 +17297,6 @@ tr.ant-table-expanded-row td > .ant-table-wrapper {
 }
 .ant-time-picker-panel-input-invalid {
   border-color: #f5222d;
-}
-.ant-time-picker-panel-clear-btn {
-  position: absolute;
-  right: 8px;
-  cursor: pointer;
-  overflow: hidden;
-  width: 20px;
-  height: 20px;
-  text-align: center;
-  line-height: 20px;
-  top: 7px;
-  margin: 0;
-}
-.ant-time-picker-panel-clear-btn-icon svg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.25);
-  display: inline-block;
-  transition: color 0.3s ease;
-}
-.ant-time-picker-panel-clear-btn-icon svg:hover {
-  color: rgba(0, 0, 0, 0.45);
 }
 .ant-time-picker-panel-narrow .ant-time-picker-panel-input-wrap {
   max-width: 112px;
@@ -17315,6 +17407,7 @@ li.ant-time-picker-panel-select-option-disabled:hover {
 .ant-time-picker {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -17401,7 +17494,8 @@ textarea.ant-time-picker-input {
 .ant-time-picker-open {
   opacity: 0;
 }
-.ant-time-picker-icon {
+.ant-time-picker-icon,
+.ant-time-picker-clear {
   position: absolute;
   z-index: 1;
   user-select: none;
@@ -17414,10 +17508,24 @@ textarea.ant-time-picker-input {
   top: 50%;
   margin-top: -7px;
 }
-.ant-time-picker-icon .ant-time-picker-clock-icon {
+.ant-time-picker-icon .ant-time-picker-clock-icon,
+.ant-time-picker-clear .ant-time-picker-clock-icon {
   color: rgba(0, 0, 0, 0.25);
   display: block;
   line-height: 1;
+}
+.ant-time-picker-clear {
+  opacity: 0;
+  z-index: 2;
+  background: #fff;
+  pointer-events: none;
+}
+.ant-time-picker-clear:hover {
+  color: rgba(0, 0, 0, 0.45);
+}
+.ant-time-picker:hover .ant-time-picker-clear {
+  opacity: 1;
+  pointer-events: auto;
 }
 .ant-time-picker-large .ant-time-picker-input {
   padding: 6px 11px;
@@ -17434,6 +17542,7 @@ textarea.ant-time-picker-input {
 .ant-timeline {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -17563,6 +17672,7 @@ textarea.ant-time-picker-input {
 .ant-tooltip {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -17607,6 +17717,7 @@ textarea.ant-time-picker-input {
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   min-height: 32px;
+  min-width: 30px;
   word-wrap: break-word;
 }
 .ant-tooltip-arrow {
@@ -17687,6 +17798,7 @@ textarea.ant-time-picker-input {
 .ant-transfer {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -17801,8 +17913,10 @@ span.ant-transfer-list-search-action {
   position: absolute;
   top: 50%;
   width: 100%;
-  margin-top: -10px;
   transform: translateY(-50%);
+}
+.ant-transfer-list-body-with-search .ant-transfer-list-body-not-found {
+  margin-top: 16px;
 }
 .ant-transfer-list-footer {
   border-top: 1px solid #e8e8e8;
@@ -17935,6 +18049,7 @@ span.ant-transfer-list-search-action {
 .ant-tree-checkbox {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -17986,10 +18101,10 @@ span.ant-transfer-list-search-action {
   border-collapse: separate;
 }
 .ant-tree-checkbox-inner:after {
-  transform: rotate(45deg) scale(0);
+  transform: rotate(45deg) scale(0) translate(-50%, -50%);
   position: absolute;
-  left: 4.57142857px;
-  top: 1.14285714px;
+  top: 50%;
+  left: 21%;
   display: table;
   width: 5.71428571px;
   height: 9.14285714px;
@@ -18013,7 +18128,7 @@ span.ant-transfer-list-search-action {
   height: 100%;
 }
 .ant-tree-checkbox-checked .ant-tree-checkbox-inner:after {
-  transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1) translate(-50%, -50%);
   position: absolute;
   display: table;
   border: 2px solid #fff;
@@ -18053,6 +18168,7 @@ span.ant-transfer-list-search-action {
 .ant-tree-checkbox-wrapper {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -18074,6 +18190,7 @@ span.ant-transfer-list-search-action {
 .ant-tree-checkbox-group {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -18114,6 +18231,7 @@ span.ant-transfer-list-search-action {
 .ant-tree {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -18356,6 +18474,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 .ant-select-tree-checkbox {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -18407,10 +18526,10 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
   border-collapse: separate;
 }
 .ant-select-tree-checkbox-inner:after {
-  transform: rotate(45deg) scale(0);
+  transform: rotate(45deg) scale(0) translate(-50%, -50%);
   position: absolute;
-  left: 4.57142857px;
-  top: 1.14285714px;
+  top: 50%;
+  left: 21%;
   display: table;
   width: 5.71428571px;
   height: 9.14285714px;
@@ -18434,7 +18553,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
   height: 100%;
 }
 .ant-select-tree-checkbox-checked .ant-select-tree-checkbox-inner:after {
-  transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1) translate(-50%, -50%);
   position: absolute;
   display: table;
   border: 2px solid #fff;
@@ -18474,6 +18593,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 .ant-select-tree-checkbox-wrapper {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -18495,6 +18615,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 .ant-select-tree-checkbox-group {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -18535,6 +18656,7 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 .ant-select-tree {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -18700,6 +18822,7 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
 .ant-select-tree-dropdown {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -18734,6 +18857,7 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
 .ant-upload {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
@@ -18842,6 +18966,7 @@ li.ant-select-tree-treenode-disabled > .ant-select-tree-node-content-wrapper:hov
 .ant-upload-list {
   font-size: 14px;
   font-variant: tabular-nums;
+  font-feature-settings: 'tnum';
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
