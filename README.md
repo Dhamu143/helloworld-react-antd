@@ -1,6 +1,13 @@
-# React Starter
+# Starter Webapp (React/Redux with Ant Design)
 
 A boilerplate and reference implementation for web applications built with React, Redux, and Ant Design.
+
+## Preview
+
+- http://react-antd.starter.emiketic.com
+- Access credentials:
+  - email: `client@starter.emiketic.com`
+  - password: `password`
 
 ## References
 
