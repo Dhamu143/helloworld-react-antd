@@ -1,5 +1,7 @@
 # Starter Webapp (React/Redux with Ant Design)
 
+![](https://img.shields.io/david/emiketic/emiketic-starter-react-antd.svg?style=for-the-badge)
+
 A boilerplate and reference implementation for web applications built with React, Redux, and Ant Design.
 
 ## Preview
