@@ -20,12 +20,12 @@
     "build-antd": "lessc ./src/antd.less ./src/antd.custom.css"
   },
   "dependencies": {
-    "antd": "~3.13.1",
+    "antd": "~3.13.5",
     "promise.prototype.finally": "~3.1.0",
     "prop-types": "~15.7.2",
-    "react": "~16.8.2",
-    "react-dom": "~16.8.2",
-    "react-redux": "~6.0.0",
+    "react": "~16.8.3",
+    "react-dom": "~16.8.3",
+    "react-redux": "~6.0.1",
     "react-router-dom": "~4.3.1",
     "react-scripts": "~2.1.5",
     "redux": "~4.0.1",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "babel-eslint": "10.0.1",
-    "eslint": "~5.14.0",
+    "eslint": "~5.14.1",
     "eslint-config-airbnb": "17.1.0",
     "eslint-plugin-import": "~2.16.0",
     "eslint-plugin-jsx-a11y": "~6.2.1",
