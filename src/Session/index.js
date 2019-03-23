@@ -18,7 +18,6 @@ import { $logout } from '../Auth/state';
 
 const withStore = connect(
   (state) => ({
-    ready: state.Activity.ready,
     authenticated: state.Auth.authenticated,
     user: state.Auth.user,
   }),
@@ -71,7 +70,7 @@ class Session extends Component {
     const content = (
       <Menu style={{ padding: 10, width: 160 }} onClick={this.handleClick}>
         <Menu.Item key="profile">
-          <Link to="/profile">Mon profile</Link>
+          <Link to="/profile">My Profile</Link>
         </Menu.Item>
 
         <Menu.Item onClick={() => logout()}>
@@ -101,25 +100,6 @@ class Session extends Component {
                 </Link>
               </Menu.Item>
             ))}
-            <Menu.SubMenu
-              title={(
-                <span>
-                  <Icon type="setting" />
-                  <span>Navigation</span>
-                </span>
-)}
-            >
-              <Menu.Item key="option1">
-                <Link to="option1">
-                  <span>Option 1</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="option2">
-                <Link to="option2">
-                  <span>Option 2</span>
-                </Link>
-              </Menu.Item>
-            </Menu.SubMenu>
           </Menu>
         </Layout.Sider>
         <Layout>
