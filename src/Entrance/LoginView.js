@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,6 +6,8 @@ import { connect } from 'react-redux';
 import {
   Form, Icon, Input, Button,
 } from 'antd';
+
+import * as PropTypes from '../common/proptypes';
 
 import * as Activity from '../Shared/Activity.service';
 
