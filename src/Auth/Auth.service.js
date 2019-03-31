@@ -3,12 +3,12 @@ import { EventEmitter } from '../common/events';
 import { API_ENDPOINT } from '../common/config';
 import * as FetchHelper from '../common/fetch.helper';
 
+import { createLogger } from '../common/logger';
+
+const Logger = createLogger('AuthService');
+
 export const AuthServiceImplementation = class AuthService {
   events = new EventEmitter();
-
-  username = '';
-
-  password = '';
 
   access_token = null;
 
@@ -17,7 +17,8 @@ export const AuthServiceImplementation = class AuthService {
   }
 
   async _loadSession() {
-    this.access_token = localStorage.getItem('auth.access_token') || null;
+    const access_token = localStorage.getItem('auth.access_token');
+    this.access_token = access_token || null;
   }
 
   async _saveSession(access_token) {
@@ -63,16 +64,26 @@ export const AuthServiceImplementation = class AuthService {
   }
 
   signup(payload) {
+    const { name, email, password } = payload;
+
     return fetch(`${API_ENDPOINT}/auth/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        user: {
+          name,
+          email,
+          password,
+        },
+        client: {},
+      }),
     })
       .then(FetchHelper.ResponseHandler, FetchHelper.ErrorHandler)
-      .then(({ token, ...result }) => {
-        this._saveSession(token);
+      .then(async ({ access_token, ...result }) => {
+        await this._saveSession(access_token);
+        await this.events.emitAsync('login');
         return result;
       });
   }

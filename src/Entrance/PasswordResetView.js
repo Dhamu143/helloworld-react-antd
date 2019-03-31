@@ -14,14 +14,14 @@ const propTypes = {
 
 const Wrapper = (C) => withStore(C);
 
-class HomeView extends Component {
+class PasswordResetView extends Component {
   state = {};
 
   render() {
-    return <div>HomeView</div>;
+    return <div>PasswordResetView</div>;
   }
 }
 
-HomeView.propTypes = propTypes;
+PasswordResetView.propTypes = propTypes;
 
-export default Wrapper(HomeView);
+export default Wrapper(PasswordResetView);

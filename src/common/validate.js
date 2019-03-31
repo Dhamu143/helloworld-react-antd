@@ -19,8 +19,7 @@ export const required = (value) => !!value || 'Required.';
 export const password = (value) => value.length >= PASSWORD_LENGTH || `Min ${PASSWORD_LENGTH} characters`;
 
 export const email = (value) => {
-  const pattern = EMAIL_PATTERN;
-  return pattern.test(value) || 'Invalid email.';
+  return EMAIL_PATTERN.test(value) || 'Invalid email.';
 };
 
 export const username = email;

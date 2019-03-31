@@ -17,19 +17,15 @@ import HomeRouter from '../Home';
 
 import { $logout } from '../Auth/state';
 
-const withStore = connect(
-  (state) => ({
-    authenticated: state.Auth.authenticated,
-    user: state.Auth.user,
-  }),
-  (dispatch) => ({
-    logout() {
-      dispatch($logout())
-        .then(() => console.info('Goodbye!'))
-        .catch((error) => console.log('oops!', error.message));
-    },
-  }),
-);
+const withStore = connect((state) => ({
+  user: state.Auth.user,
+}));
+
+const propTypes = {
+  ...PropTypes.withRouting,
+  ...PropTypes.withState,
+  user: PropTypes.User.isRequired,
+};
 
 const Wrapper = (C) => withRouter(withStore(C));
 
@@ -53,6 +49,14 @@ class Session extends Component {
       },
     ],
   };
+
+  logout() {
+    const { dispatch } = this.props;
+
+    dispatch($logout())
+      .then(() => console.info('Goodbye!'))
+      .catch((error) => console.log('oops!', error.message));
+  }
 
   handleClick = (e) => {
     this.setState({
@@ -150,9 +154,6 @@ class Session extends Component {
   }
 }
 
-Session.propTypes = {
-  logout: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-};
+Session.propTypes = propTypes;
 
 export default Wrapper(Session);

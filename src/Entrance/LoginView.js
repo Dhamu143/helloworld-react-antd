@@ -19,6 +19,12 @@ const withStore = connect((state) => ({
   processing: state.Activity.processingByOperation['Auth.login'] || false,
 }));
 
+const propTypes = {
+  ...PropTypes.withRouting,
+  ...PropTypes.withState,
+  processing: PropTypes.bool.isRequired,
+};
+
 const Wrapper = (C) => withStore(C);
 
 class LoginView extends Component {
@@ -89,9 +95,6 @@ class LoginView extends Component {
   }
 }
 
-LoginView.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  processing: PropTypes.bool.isRequired,
-};
+LoginView.propTypes = propTypes;
 
 export default Wrapper(LoginView);

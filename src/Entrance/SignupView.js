@@ -14,14 +14,14 @@ const propTypes = {
 
 const Wrapper = (C) => withStore(C);
 
-class HomeView extends Component {
+class SignupView extends Component {
   state = {};
 
   render() {
-    return <div>HomeView</div>;
+    return <div>SignupView</div>;
   }
 }
 
-HomeView.propTypes = propTypes;
+SignupView.propTypes = propTypes;
 
-export default Wrapper(HomeView);
+export default Wrapper(SignupView);
