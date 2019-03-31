@@ -9,7 +9,7 @@ import {
 
 import * as PropTypes from '../common/proptypes';
 
-import * as Activity from '../Shared/Activity.service';
+import * as Dialog from '../Shared/Dialog';
 
 import * as $validate from '../common/validate';
 
@@ -34,7 +34,7 @@ class LoginView extends Component {
   login() {
     const { dispatch } = this.props;
 
-    dispatch($login(this.state.username, this.state.password)).catch((error) => Activity.toast('failure', error.message));
+    dispatch($login(this.state.username, this.state.password)).catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
   }
 
   handleInputChange(event) {
