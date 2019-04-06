@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { Provider as StateProvider } from 'react-redux';
 
 import { LocaleProvider } from 'antd';
 import frFR from 'antd/lib/locale-provider/fr_FR';
@@ -18,11 +18,11 @@ bootstrap();
 
 const AppContainer = () => (
   <LocaleProvider locale={frFR}>
-    <Provider store={store}>
+    <StateProvider store={store}>
       <Router>
         <App />
       </Router>
-    </Provider>
+    </StateProvider>
   </LocaleProvider>
 );
 

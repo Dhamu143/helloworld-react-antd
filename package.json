@@ -17,7 +17,7 @@
     "build-antd": "lessc ./src/antd.less ./src/antd.custom.css"
   },
   "dependencies": {
-    "antd": "~3.15.2",
+    "antd": "~3.16.1",
     "promise.prototype.finally": "~3.1.0",
     "prop-types": "~15.7.2",
     "react": "~16.8.6",
