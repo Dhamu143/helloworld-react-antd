@@ -78,7 +78,7 @@ class Session extends Component {
           <Link to="/profile">My Profile</Link>
         </Menu.Item>
 
-        <Menu.Item onClick={() => logout()}>
+        <Menu.Item onClick={() => this.logout()}>
           <Icon type="export" />
           <span>Logout</span>
         </Menu.Item>

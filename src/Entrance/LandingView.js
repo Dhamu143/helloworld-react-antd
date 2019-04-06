@@ -1,7 +1,13 @@
 import React from 'react';
 
-// @TODO implement full-screen loader
+import { Spin } from 'antd';
 
-const LandingView = () => <div>Loading...</div>;
+function LandingView() {
+  return (
+    <div className="-x-fit -x-content-center">
+      <Spin size="large" />
+    </div>
+  );
+}
 
 export default LandingView;

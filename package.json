@@ -14,7 +14,7 @@
     "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile ./jest.setup.js",
     "build": "react-scripts build",
     "prebuild": "npm run build-antd",
-    "build-antd": "lessc ./src/antd.less ./src/antd.custom.css"
+    "build-antd": "lessc ./src/styles/antd.less ./src/styles/antd.custom.css"
   },
   "dependencies": {
     "antd": "~3.16.1",
