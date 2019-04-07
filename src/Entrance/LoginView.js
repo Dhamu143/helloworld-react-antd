@@ -16,7 +16,7 @@ import * as $validate from '../common/validate';
 import { $login } from '../Auth/state';
 
 const withStore = connect((state) => ({
-  processing: state.Activity.processingByOperation['Auth.login'] || false,
+  processing: state.Activity.processingByOperation[$login.OPERATION] || false,
 }));
 
 const propTypes = {
