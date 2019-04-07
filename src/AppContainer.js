@@ -4,26 +4,20 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider as StateProvider } from 'react-redux';
 
 import { LocaleProvider } from 'antd';
-import frFR from 'antd/lib/locale-provider/fr_FR';
+import AntdLocale from 'antd/lib/locale-provider/en_US';
 
 import App from './App';
 
-import { setupStore } from './store';
-
-import bootstrap from './bootstrap';
-
-const store = setupStore();
-
-bootstrap();
+import { getStore } from './store';
 
 const AppContainer = () => (
-  <LocaleProvider locale={frFR}>
-    <StateProvider store={store}>
+  <StateProvider store={getStore()}>
+    <LocaleProvider locale={AntdLocale}>
       <Router>
         <App />
       </Router>
-    </StateProvider>
-  </LocaleProvider>
+    </LocaleProvider>
+  </StateProvider>
 );
 
 export default AppContainer;
