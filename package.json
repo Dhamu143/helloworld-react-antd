@@ -17,13 +17,13 @@
     "build-antd": "lessc ./src/styles/antd.less ./src/styles/antd.custom.css"
   },
   "dependencies": {
-    "antd": "~3.16.1",
+    "antd": "~3.16.2",
     "promise.prototype.finally": "~3.1.0",
     "prop-types": "~15.7.2",
     "pwacompat": "~2.0.8",
     "react": "~16.8.6",
     "react-dom": "~16.8.6",
-    "react-redux": "~6.0.1",
+    "react-redux": "~7.0.1",
     "react-router-dom": "~5.0.0",
     "react-scripts": "~2.1.8",
     "redux": "~4.0.1",
