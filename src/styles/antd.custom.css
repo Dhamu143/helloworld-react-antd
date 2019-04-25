@@ -15857,11 +15857,14 @@ span.ant-radio + * {
   border-radius: 4px 4px 0 0;
   border-collapse: collapse;
 }
+.ant-table-thead > tr {
+  background: #fafafa;
+}
 .ant-table-thead > tr > th {
   color: rgba(0, 0, 0, 0.85);
   font-weight: 500;
   text-align: left;
-  background: #fafafa;
+  background: transparent;
   border-bottom: 1px solid #e8e8e8;
   transition: background 0.3s ease;
 }
@@ -15938,8 +15941,6 @@ span.ant-radio + * {
 .ant-table-thead > tr > th.ant-table-column-has-actions {
   position: relative;
   background-clip: padding-box;
-  /* stylelint-disable-next-line */
-  -webkit-background-clip: border-box;
 }
 .ant-table-thead > tr > th.ant-table-column-has-actions.ant-table-column-has-filters {
   padding-right: 30px !important;
@@ -16042,9 +16043,6 @@ span.ant-radio + * {
 .ant-table-thead > tr:hover:not(.ant-table-expanded-row) > td,
 .ant-table-tbody > tr:hover:not(.ant-table-expanded-row) > td {
   background: #e6f7ff;
-}
-.ant-table-thead > tr:hover {
-  background: none;
 }
 .ant-table-footer {
   position: relative;
