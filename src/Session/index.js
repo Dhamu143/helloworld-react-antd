@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import {
   Switch, Route, Redirect, Link, withRouter,
 } from 'react-router-dom';
@@ -8,9 +8,9 @@ import {
   Layout, Menu, Icon, Avatar, Dropdown, Button, Col, Row,
 } from 'antd';
 
-import { connect } from 'react-redux';
-
 import * as PropTypes from '../common/proptypes';
+
+import * as Dialog from '../Shared/Dialog';
 
 import ProfileView from './ProfileView';
 import HomeRouter from '../Home';
@@ -31,18 +31,14 @@ const Wrapper = (C) => withRouter(withStore(C));
 
 class Session extends Component {
   state = {
-    collapsed: false,
-    swipeableDrawerCallapsed: false,
-    selectedKey: 'home',
+    navigationMenuVisible: false,
     navigationMenuItems: [
       {
-        key: 'home',
         title: 'Home',
         icon: 'home',
         route: '/home',
       },
       {
-        key: 'profile',
         title: 'Profile',
         icon: 'user',
         route: '/profile',
@@ -50,31 +46,28 @@ class Session extends Component {
     ],
   };
 
+  toggleNavigationMenuVisibility() {
+    this.setState((state) => ({
+      navigationMenuVisible: !state.navigationMenuVisible,
+    }));
+  }
+
   logout() {
     const { dispatch } = this.props;
 
     dispatch($logout())
-      .then(() => console.info('Goodbye!'))
-      .catch((error) => console.log('oops!', error.message));
+      .then(() => Dialog.toast(Dialog.SUCCESS, 'Goodbye!'))
+      .catch((error) => Dialog.toast(Dialog.FAILURE, error.message));
   }
 
-  handleClick = (e) => {
-    this.setState({
-      selectedKey: e.key,
-    });
-  };
-
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-    });
-  };
-
   render() {
-    const text = <span>Title</span>;
+    const { navigationMenuVisible, navigationMenuItems } = this.state;
+
+    const { user } = this.props;
+
     const content = (
-      <Menu style={{ padding: 10, width: 160 }} onClick={this.handleClick}>
-        <Menu.Item key="profile">
+      <Menu style={{ padding: 10, width: 160 }}>
+        <Menu.Item>
           <Link to="/profile">My Profile</Link>
         </Menu.Item>
 
@@ -84,21 +77,19 @@ class Session extends Component {
         </Menu.Item>
       </Menu>
     );
-    const { collapsed, navigationMenuItems } = this.state;
-    const { user, logout } = this.props;
+
     return (
       <Layout>
-        <Layout.Sider trigger={null} collapsible collapsed={collapsed}>
+        <Layout.Sider trigger={null} collapsible collapsed={!navigationMenuVisible}>
           <div className="logo" />
           <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={[this.state.selectedKey]}
-            selectedKeys={[this.state.selectedKey]}
-            onClick={this.handleClick}
+            defaultSelectedKeys={[this.props.location.pathname]}
+            selectedKeys={[this.props.location.pathname]}
           >
             {navigationMenuItems.map((navigationMenuItem) => (
-              <Menu.Item key={navigationMenuItem.key}>
+              <Menu.Item key={navigationMenuItem.route}>
                 <Link to={navigationMenuItem.route}>
                   <Icon type={navigationMenuItem.icon} />
                   <span>{navigationMenuItem.title}</span>
@@ -116,8 +107,8 @@ class Session extends Component {
                     fontSize: 18,
                     cursor: 'pointer',
                   }}
-                  type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                  onClick={this.toggle}
+                  type={navigationMenuVisible ? 'menu-fold' : 'menu-unfold'}
+                  onClick={() => this.toggleNavigationMenuVisibility()}
                 />
               </Col>
               <Col xs={10} sm={10} md={10} lg={4} xl={4}>

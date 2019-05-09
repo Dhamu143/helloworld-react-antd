@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, StyleSheet } from 'react';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -10,21 +10,30 @@ import LoginView from './LoginView';
 import SignupView from './SignupView';
 import PasswordResetView from './PasswordResetView';
 
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  content: {
+    width: 300,
+  },
+  logo: {
+    margin: 16,
+    width: 100,
+  },
+};
+
 class Entrance extends Component {
   state = {};
 
   render() {
     return (
-      <Layout
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Card style={{ width: 300 }}>
-          <img src={LogoImage} alt="logo" style={{ margin: 16, width: 100 }} />
+      <Layout style={styles.container}>
+        <Card style={styles.content}>
+          <img src={LogoImage} alt="logo" style={styles.logo} />
           <Switch>
             <Route exact path="/login" component={LoginView} />
             <Route exact path="/signup" component={SignupView} />
